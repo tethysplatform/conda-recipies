@@ -1,0 +1,48 @@
+{% set name = "django-simple-captcha" %}
+{% set version = "0.5.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/86/d4/5baf10bfc9eb7844872c256898a405e81f22f7213e008ec90875689f913d/django-simple-captcha-0.5.11.zip
+  sha256: e14e5c4b207be3dffb200309e7ac7a48de1a2b3293f09eefedd9ab317c4d9a7f
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python
+    - django
+    - six
+    - pillow
+    - django-ranged-response
+
+test:
+  imports:
+    - captcha
+
+about:
+  home: https://github.com/mbi/django-simple-captcha
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "A very simple, yet powerful, Django captcha application"
+  description: |
+    Django Simple Captcha is an extremely simple, yet highly customizable
+    Django application to add captcha images to any Django form.
+  doc_url: https://django-simple-captcha.readthedocs.io/en/latest/
+  dev_url: https://github.com/mbi/django-simple-captcha
+
+extra:
+  recipe-maintainers:
+    - sdc50

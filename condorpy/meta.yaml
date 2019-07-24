@@ -1,0 +1,47 @@
+{% set name = "condorpy" %}
+{% set version = "0.5.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: 202ff4d0b1ad1829d9d80fb396ec446eed73240427ecb5bb6106ea752ac040f5
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python
+    - scp
+    - paramiko
+
+test:
+  imports:
+    - condorpy
+
+about:
+  home: http://www.tethysplatform.org/condorpy/
+  license: BSD-2-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: "A Python wrapper for HTCondor's cli"
+  description: |
+    Condorpy is a wrapper for the command line interface (cli) of
+    HTCondor and enables creating submitting and monitoring HTCondor
+    jobs from Python. HTCondor must be installed to use condorpy.
+  doc_url: https://condorpy.readthedocs.io/en/latest/
+  dev_url: https://github.com/tethysplatform/condorpy
+
+extra:
+  recipe-maintainers:
+    - sdc50

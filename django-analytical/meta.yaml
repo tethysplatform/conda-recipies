@@ -1,0 +1,59 @@
+{% set name = "django-analytical" %}
+{% set version = "2.5.0" %}
+{% set url = "https://github.com/jazzband/django-analytical" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: 0871db04aa8c864b0b44c98b462d2b8682ba9c31ab89f50d54a5ddfdc3ff6223
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python >=3.5
+    - django
+
+test:
+  imports:
+    - analytical
+    - analytical.templatetags
+    - analytical.tests
+    - analytical.tests.templatetags
+
+about:
+  home: {{ url }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: "Analytics service integration for Django projects"
+  description: |
+    The django-analytical application integrates analytics services into
+    a Django project. Using an analytics service with a Django project
+    means adding Javascript tracking code to the project templates. Of
+    course, every service has its own specific installation instructions.
+    Furthermore, you need to include your unique identifiers, which then
+    end up in the templates. Not very nice. This application hides the
+    details of the different analytics services behind a generic interface,
+    and keeps personal information and configuration out of the templates.
+    Its goal is to make the basic set-up very simple, while allowing advanced
+    users to customize tracking. Each service is set up as recommended by the
+    services themselves, using an asynchronous version of the Javascript code
+    if possible.
+  doc_url: https://django-analytical.readthedocs.io/en/latest/
+  dev_url: {{ url }}
+
+extra:
+  recipe-maintainers:
+    - sdc50

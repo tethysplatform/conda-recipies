@@ -1,0 +1,47 @@
+{% set name = "django-ranged-response" %}
+{% set version = "0.2.0" %}
+{% set url = "https://github.com/wearespindle/django-ranged-fileresponse" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: f71fff352a37316b9bead717fc76e4ddd6c9b99c4680cdf4783b9755af1cf985
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python
+    - django
+
+test:
+  imports:
+    - ranged_response
+
+about:
+  home: {{ url }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "Modified Django FileResponse that adds Content-Range headers."
+  description: |
+    This is a modified FileResponse that returns `Content-Range`
+    headers with the HTTP response, so browsers (read Safari 9+)
+    that request the file, can stream the response properly.
+  doc_url: {{ url }}
+  dev_url: {{ url }}
+
+extra:
+  recipe-maintainers:
+    - sdc50

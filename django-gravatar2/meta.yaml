@@ -1,0 +1,46 @@
+{% set name = "django-gravatar2" %}
+{% set version = "1.4.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: 46cd5cecf46d7c6155aa31badb2575f634fc6fe65ad73c2b711a2fee3b205be3
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python >=3.5
+    - django
+
+test:
+  imports:
+    - django_gravatar
+    - django_gravatar.templatetags
+
+about:
+  home: https://github.com/twaddington/django-gravatar
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Essential Gravatar support for Django. Features helper methods, templatetags and a full test suite!
+  description: |
+    A lightweight django-gravatar app. Includes helper methods
+    for interacting with gravatars outside of template code.
+  doc_url: https://github.com/twaddington/django-gravatar
+  dev_url: https://github.com/twaddington/django-gravatar
+
+extra:
+  recipe-maintainers:
+    - sdc50

@@ -1,0 +1,48 @@
+{% set name = "django-termsandconditions" %}
+{% set version = "1.2.13" %}
+{% set url = "https://github.com/cyface/django-termsandconditions" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: 225745656bddf49c8dc643e22c3ae1045e0a6defbc16551bafa328685b394e77
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python >=3.5
+    - django >=1.8.3
+    - future >=0.15.2
+
+test:
+  imports:
+    - termsandconditions
+    - termsandconditions.templatetags
+
+about:
+  home: {{ url }}
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: "django-termsandconditions is a Django app that enables users to accept terms and conditions of a site."
+  description: |
+    Django Terms and Conditions gives you an configurable way to send
+    users to a T&C acceptance page before they can access the site.
+  doc_url: {{ url }}
+  dev_url: {{ url }}
+
+extra:
+  recipe-maintainers:
+    - sdc50

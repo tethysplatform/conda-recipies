@@ -1,0 +1,50 @@
+{% set name = "django-session-security" %}
+{% set version = "2.6.5" %}
+{% set url = "https://github.com/cyface/django-termsandconditions" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: 1b78b304fc1481f71addaba6b24bd30f7731478ba30c32f04f534dc2c0976d46
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python >=3.5
+    - django
+
+test:
+  imports:
+    - session_security
+    - session_security.templatetags
+
+about:
+  home: {{ url }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "Client and server side session timeout with warnings"
+  description: |
+    A little javascript and middleware work together to ensure that
+    the user was active during the past X minutes in any tab he has
+    open. Otherwise, display a warning leaving a couple of minutes
+    to show any kind of activity like moving the mouse. Otherwise,
+    logout the user.
+  doc_url: https://django-session-security.readthedocs.io/en/latest/
+  dev_url: {{ url }}
+
+extra:
+  recipe-maintainers:
+    - sdc50

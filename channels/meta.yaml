@@ -1,0 +1,50 @@
+{% set name = "channels" %}
+{% set version = "2.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: af7cdba9efb3f55b939917d1b15defb5d40259936013e60660e5e9aff98db4c5
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python >=3.5
+    - django >=1.11
+    - asgiref
+    - daphne
+
+test:
+  imports:
+    - channels
+
+about:
+  home: https://github.com/django/channels
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: 'Brings async, event-driven capabilities to Django. Django 1.11 and up only.'
+  description: |
+    Channels augments Django to bring WebSocket, long-poll HTTP,
+    task offloading and other async support to your code, using
+    familiar Django design patterns and a flexible underlying
+    framework that lets you not only customize behaviours but
+    also write support for your own protocols and needs.
+  doc_url: https://channels.readthedocs.io/
+  dev_url: https://github.com/django/channels
+
+extra:
+  recipe-maintainers:
+    - sdc50
