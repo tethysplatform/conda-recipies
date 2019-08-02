@@ -1,0 +1,53 @@
+{% set name = "django-recaptcha2" %}
+{% set version = "1.4.1" %}
+{% set url = "https://github.com/kbytesys/django-recaptcha2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: c0b43851b05c6bf6ebb5ecc890c13ccedacd9bb33d64b4291c74dd6fcbc89366
+
+build:
+  number: 0
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python >=3.5
+    - django
+    - requests
+
+test:
+  imports:
+    - snowpenguin
+    - snowpenguin.django
+    - snowpenguin.django.recaptcha2
+    - snowpenguin.django.recaptcha2.migrations
+    - snowpenguin.django.recaptcha2.templatetags
+
+about:
+  home: {{ url }}
+  license: GNU LGPL
+  license_family: LGPL
+  license_file: LICENSE
+  summary: "Google reCAPTCHA v2 integration for Django projects"
+  description: |
+    This integration app implements a reCAPTCHA field for Google reCAPTCHA v2 with explicit rendering and 
+    multiple reCAPTCHA support.
+    
+    It supports also the invisible reCAPTCHA with the automatic render mode.
+  doc_url: https://github.com/kbytesys/django-recaptcha2
+  dev_url: {{ url }}
+
+extra:
+  recipe-maintainers:
+    - msouff
