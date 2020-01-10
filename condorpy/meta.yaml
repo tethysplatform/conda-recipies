@@ -1,5 +1,5 @@
 {% set name = "condorpy" %}
-{% set version = "0.5.2" %}
+{% set version = "0.5.3" %}
 
 package:
   name: {{ name|lower }}
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ name|lower }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name|lower|first }}/{{ name|lower }}/{{ name|lower }}-{{ version }}.tar.gz
-  sha256: 6c5a6b577fd7e084f0f69ad29365fd13b9ea95547a7cef486f00e57994e55e2f
+  sha256: 4354acf1fa49b32f602ed8ac41912e31d0688a36fe9614e7e0c6dadd82e924a2
 
 build:
   number: 0
